@@ -1,0 +1,14 @@
+﻿@page
+@model ConfirmDeleteModel
+@{
+    ViewData["Title"] = "Подтверждение удаления";
+}
+
+<h1>Вы точно хотите удалить аккаунт?</h1>
+
+<form method="post">
+    <div class="mt-3">
+        <button type="submit" class="btn btn-danger" asp-page-handler="Delete">Да, удалить</button>
+        <a asp-page="/Account" class="btn btn-secondary">Нет, вернуться</a>
+    </div>
+</form>

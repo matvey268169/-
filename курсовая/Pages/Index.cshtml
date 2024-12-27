@@ -1,0 +1,105 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Добро пожаловать в систему учета и выдачи книг</h1>
+</div>
+<!-- Кнопки -->
+<div class="mt-4">
+    <a class="btn btn-orange" asp-page="/Login">Вход</a>
+    <a class="btn btn-orange" asp-page="/Register">Регистрация</a>
+    <a class="btn btn-orange" asp-page="/Account">Аккаунт</a>
+</div>
+</div>
+
+<form method="get" class="mb-4">
+    <div class="d-flex justify-content-center gap-2">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="genreDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Жанр
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="genreDropdown">
+                <li><button type="submit" class="dropdown-item" name="genre" value="">Все жанры</button></li>
+                <li><button type="submit" class="dropdown-item" name="genre" value="Фантастика">Фантастика</button></li>
+                <li><button type="submit" class="dropdown-item" name="genre" value="Детектив">Детектив</button></li>
+                <li><button type="submit" class="dropdown-item" name="genre" value="Роман">Роман</button></li>
+                <li><button type="submit" class="dropdown-item" name="genre" value="Научная литература">Научная литература</button></li>
+            </ul>
+        </div>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="authorDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Автор
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="authorDropdown">
+                <li><button type="submit" class="dropdown-item" name="author" value="">Все авторы</button></li>
+                <li><button type="submit" class="dropdown-item" name="author" value="Лев Толстой">Лев Толстой</button></li>
+                <li><button type="submit" class="dropdown-item" name="author" value="Джордж Оруэлл">Джордж Оруэлл</button></li>
+                <li><button type="submit" class="dropdown-item" name="author" value="Михаил Булгаков">Михаил Булгаков</button></li>
+                <li><button type="submit" class="dropdown-item" name="author" value="Агата Кристи">Агата Кристи</button></li>
+            </ul>
+        </div>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="yearDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Год выпуска
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="yearDropdown">
+                <li><button type="submit" class="dropdown-item" name="year" value="">Все годы</button></li>
+                <li><button type="submit" class="dropdown-item" name="year" value="2020">2020</button></li>
+                <li><button type="submit" class="dropdown-item" name="year" value="2010">2010</button></li>
+                <li><button type="submit" class="dropdown-item" name="year" value="2000">2000</button></li>
+                <li><button type="submit" class="dropdown-item" name="year" value="1990">1990</button></li>
+            </ul>
+        </div>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="countryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Страна
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="countryDropdown">
+                <li><button type="submit" class="dropdown-item" name="country" value="">Все страны</button></li>
+                <li><button type="submit" class="dropdown-item" name="country" value="Россия">Россия</button></li>
+                <li><button type="submit" class="dropdown-item" name="country" value="США">США</button></li>
+                <li><button type="submit" class="dropdown-item" name="country" value="Великобритания">Великобритания</button></li>
+                <li><button type="submit" class="dropdown-item" name="country" value="Франция">Франция</button></li>
+            </ul>
+        </div>
+    </div>
+</form>
+
+
+@if (Model.FilteredBooks.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Автор</th>
+                <th>Год выпуска</th>
+                <th>Страна</th>
+                <th>Жанр</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model.FilteredBooks)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.Year</td>
+                    <td>@book.Country</td>
+                    <td>@book.Genre</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Книги не найдены.</p>
+}
+

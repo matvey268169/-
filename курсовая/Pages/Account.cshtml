@@ -1,0 +1,65 @@
+﻿@page
+@model курсовая.Pages.AccountModel
+@{
+    ViewData["Title"] = "Аккаунт";
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<h1>Аккаунт</h1>
+<p>Управление вашим аккаунтом.</p>
+
+<!-- Остальная часть страницы -->
+
+<div class="account-info">
+    <p><strong>Имя пользователя:</strong> User123</p>
+    <p><strong>E-mail:</strong> user123@example.com</p>
+    <p><strong>Номер телефона:</strong> +1234567890</p>
+</div>
+
+<h2>История книг</h2>
+@if (Model.BorrowedBooks.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Название книги</th>
+                <th>Автор</th>
+                <th>Дата взятия</th>
+                <th>Дата возврата</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model.BorrowedBooks)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.BorrowDate.ToShortDateString()</td>
+                    <td>@(book.ReturnDate?.ToShortDateString() ?? "Не возвращена")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Вы еще не брали книги.</p>
+}
+
+<div class="mt-3">
+    <a asp-page="/ChangePassword" class="btn btn-orange">Изменить пароль</a>
+    <<a asp-page="/ConfirmDelete" class="btn btn-danger">Удалить аккаунт</a>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
